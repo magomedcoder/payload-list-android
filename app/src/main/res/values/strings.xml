@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">АСКУЭ</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="username">Имя пользователя</string>
+    <string name="password">Пароль</string>
+    <string name="enter">Войти</string>
+    <string name="authorization_failed">Авторизация не удалась</string>
+    <string name="please_authorization">Пожалуйста, авторизуйтесь</string>
 </resources>
