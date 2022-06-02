@@ -62,4 +62,10 @@ dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'
+
+    implementation "io.insert-koin:koin-android:3.2.0-beta-1"
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+
 }

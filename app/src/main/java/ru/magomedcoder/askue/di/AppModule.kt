@@ -14,6 +14,7 @@ import ru.magomedcoder.askue.data.local.UserPreferences
 import ru.magomedcoder.askue.data.remote.api.UserApi
 import ru.magomedcoder.askue.data.repository.UserRepositoryImpl
 import ru.magomedcoder.askue.domain.repository.UserRepository
+import ru.magomedcoder.askue.utils.NetworkHelper
 import javax.inject.Singleton
 
 @Module
@@ -22,8 +23,9 @@ class AppModule() {
 
     @Provides
     @Singleton
-    fun provideUserApi(): UserApi {
+    fun provideAuthApi(): UserApi {
         return Retrofit.Builder()
+            .client(NetworkHelper().addHeaderAuthorization())
             .baseUrl(Constants.Api.URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -32,11 +34,11 @@ class AppModule() {
 
     @Provides
     @Singleton
-    fun provideUserRepository(
-        userApi: UserApi,
+    fun provideAuthRepository(
+        authApi: UserApi,
         userPreferences: UserPreferences
     ): UserRepository {
-        return UserRepositoryImpl(userApi, userPreferences)
+        return UserRepositoryImpl(authApi, userPreferences)
     }
 
     @Provides
