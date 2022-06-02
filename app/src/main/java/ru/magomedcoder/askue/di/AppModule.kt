@@ -11,9 +11,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.magomedcoder.askue.Constants
 import ru.magomedcoder.askue.data.local.UserPreferences
-import ru.magomedcoder.askue.data.remote.api.AuthApi
-import ru.magomedcoder.askue.data.repository.AuthRepositoryImpl
-import ru.magomedcoder.askue.domain.repository.AuthRepository
+import ru.magomedcoder.askue.data.remote.api.UserApi
+import ru.magomedcoder.askue.data.repository.UserRepositoryImpl
+import ru.magomedcoder.askue.domain.repository.UserRepository
 import javax.inject.Singleton
 
 @Module
@@ -22,21 +22,21 @@ class AppModule() {
 
     @Provides
     @Singleton
-    fun provideAuthApi(): AuthApi {
+    fun provideUserApi(): UserApi {
         return Retrofit.Builder()
             .baseUrl(Constants.Api.URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(AuthApi::class.java)
+            .create(UserApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideAuthRepository(
-        authApi: AuthApi,
+    fun provideUserRepository(
+        userApi: UserApi,
         userPreferences: UserPreferences
-    ): AuthRepository {
-        return AuthRepositoryImpl(authApi, userPreferences)
+    ): UserRepository {
+        return UserRepositoryImpl(userApi, userPreferences)
     }
 
     @Provides

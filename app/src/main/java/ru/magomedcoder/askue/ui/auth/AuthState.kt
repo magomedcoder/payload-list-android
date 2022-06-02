@@ -6,4 +6,5 @@ sealed class AuthState {
     class Success(val response: Login) : AuthState()
     class Failure(val error: String) : AuthState()
     object Empty : AuthState()
+    class Logged(val logged: Boolean) : AuthState()
 }

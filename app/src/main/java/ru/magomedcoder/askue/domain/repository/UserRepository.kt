@@ -4,9 +4,11 @@ import ru.magomedcoder.askue.domain.model.Login
 import ru.magomedcoder.askue.domain.model.User
 import ru.magomedcoder.askue.utils.Resource
 
-interface AuthRepository {
+interface UserRepository {
 
     suspend fun saveToken(token: String?)
+
+    fun isToken(): Boolean
 
     fun getToken(): User?
 

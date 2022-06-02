@@ -8,5 +8,14 @@
         android:id="@+id/authFragment"
         android:name="ru.magomedcoder.askue.ui.auth.AuthFragment"
         android:label="auth_fragment"
-        tools:layout="@layout/fragment_auth" />
+        tools:layout="@layout/fragment_auth">
+        <action
+            android:id="@+id/action_authFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="ru.magomedcoder.askue.ui.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" />
 </navigation>

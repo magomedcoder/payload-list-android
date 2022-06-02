@@ -7,7 +7,7 @@ import ru.magomedcoder.askue.data.remote.response.AuthResponse
 import javax.inject.Singleton
 
 @Singleton
-interface AuthApi {
+interface UserApi {
 
     @POST("auth/token/login")
     suspend fun doLogin(@Body request: AuthRequest): AuthResponse

@@ -6,4 +6,5 @@
     <string name="enter">Войти</string>
     <string name="authorization_failed">Авторизация не удалась</string>
     <string name="please_authorization">Пожалуйста, авторизуйтесь</string>
+    <string name="welcome">Добро пожаловать</string>
 </resources>

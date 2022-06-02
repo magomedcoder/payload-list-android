@@ -3,21 +3,26 @@ package ru.magomedcoder.askue.data.repository
 import retrofit2.HttpException
 import ru.magomedcoder.askue.R
 import ru.magomedcoder.askue.data.local.UserPreferences
-import ru.magomedcoder.askue.data.remote.api.AuthApi
+import ru.magomedcoder.askue.data.remote.api.UserApi
 import ru.magomedcoder.askue.data.remote.request.AuthRequest
 import ru.magomedcoder.askue.domain.model.Login
 import ru.magomedcoder.askue.domain.model.User
-import ru.magomedcoder.askue.domain.repository.AuthRepository
+import ru.magomedcoder.askue.domain.repository.UserRepository
 import ru.magomedcoder.askue.utils.Resource
 import java.io.IOException
 
-class AuthRepositoryImpl(
-    private val api: AuthApi,
+class UserRepositoryImpl(
+    private val api: UserApi,
     private val userPreferences: UserPreferences
-) : AuthRepository {
+) : UserRepository {
 
     override suspend fun saveToken(token: String?) {
         userPreferences.setToken(token.toString())
+    }
+
+    override fun isToken(): Boolean {
+        val sessionId = userPreferences.getToken()
+        return (sessionId != null)
     }
 
     override fun getToken(): User? {

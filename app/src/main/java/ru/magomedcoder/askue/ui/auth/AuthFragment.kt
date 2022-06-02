@@ -1,13 +1,13 @@
 package ru.magomedcoder.askue.ui.auth
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.magomedcoder.askue.R
 import ru.magomedcoder.askue.databinding.FragmentAuthBinding
@@ -24,12 +24,20 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             viewModel.authState.collect { state ->
                 when (state) {
                     is AuthState.Success -> {
-                        Log.v("AuthFragment", state.response.authToken)
+                        findNavController().navigate(R.id.action_authFragment_to_mainFragment)
+                        Toast
+                            .makeText(activity, R.string.welcome, Toast.LENGTH_SHORT)
+                            .show()
                     }
                     is AuthState.Failure -> {
                         Toast
                             .makeText(activity, R.string.authorization_failed, Toast.LENGTH_SHORT)
                             .show()
+                    }
+                    is AuthState.Logged -> {
+                        if (state.logged) {
+                            findNavController().navigate(R.id.action_authFragment_to_mainFragment)
+                        }
                     }
                     else -> {
                         Toast
