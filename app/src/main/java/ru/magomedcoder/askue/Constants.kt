@@ -9,6 +9,7 @@ object Constants {
     object Pref {
         const val NAME = "cloud-bit-askue"
         const val AUTH_TOKEN = "PREF_KEY_AUTH_TOKEN"
+        const val ORGANIZATION_ID = "PREF_KEY_ORGANIZATION_ID"
     }
 
 }

@@ -20,9 +20,18 @@ class UserRepositoryImpl(
         userPreferences.setToken(token.toString())
     }
 
+    override suspend fun saveOrganizationId(organizationId: Int?) {
+        userPreferences.setOrganizationId(organizationId.toString())
+    }
+
     override fun isToken(): Boolean {
         val sessionId = userPreferences.getToken()
         return (sessionId != null)
+    }
+
+    override fun isOrganizationId(): Boolean {
+        val organizationId = userPreferences.getOrganizationId()
+        return (organizationId != null)
     }
 
     override fun getToken(): Login? {
@@ -35,6 +44,7 @@ class UserRepositoryImpl(
 
     override fun removeToken() {
         userPreferences.removeToken()
+        userPreferences.removeOrganizationId()
     }
 
     override suspend fun login(username: String, password: String): Resource<Login> {

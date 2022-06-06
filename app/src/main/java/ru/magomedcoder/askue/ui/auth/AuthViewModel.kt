@@ -45,6 +45,10 @@ class AuthViewModel @Inject constructor(
         when (val response = repository.userInfo()) {
             is Resource.Success -> {
                 val data = response.data!!
+                val organizationId = repository.userInfo().data!!
+                if (repository.isOrganizationId()) {
+                    repository.saveOrganizationId(organizationId.organizationId)
+                }
                 _userState.value = UserState.Success(data)
             }
             is Resource.Error -> _userState.value =

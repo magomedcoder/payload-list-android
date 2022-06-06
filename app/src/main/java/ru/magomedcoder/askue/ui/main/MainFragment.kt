@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.magomedcoder.askue.R
 import ru.magomedcoder.askue.databinding.FragmentMainBinding
 import ru.magomedcoder.askue.domain.model.ElectronicCounter
@@ -31,7 +30,7 @@ import androidx.annotation.RequiresApi
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>() {
 
-    private val viewModel by viewModel<MainViewModel>()
+    private val viewModel: MainViewModel by viewModels()
     private val loginViewModel: AuthViewModel by viewModels()
 
     private lateinit var adapter: ElectronicCounterAdapter
@@ -51,6 +50,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                                     Toast.LENGTH_SHORT
                                 )
                                 .show()
+
+                            loginViewModel.getUserInfo()
+
                             findNavController().navigate(R.id.action_mainFragment_to_authFragment)
                         }
                     }

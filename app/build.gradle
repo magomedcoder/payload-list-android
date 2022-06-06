@@ -64,8 +64,6 @@ dependencies {
 
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'
 
-    implementation 'io.insert-koin:koin-android:3.2.0'
-
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
 }

@@ -8,7 +8,11 @@ interface UserRepository {
 
     suspend fun saveToken(token: String?)
 
+    suspend fun saveOrganizationId(organizationId: Int?)
+
     fun isToken(): Boolean
+
+    fun isOrganizationId(): Boolean
 
     fun getToken(): Login?
 
