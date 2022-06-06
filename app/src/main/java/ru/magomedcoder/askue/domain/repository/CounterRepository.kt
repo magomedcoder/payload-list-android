@@ -6,6 +6,15 @@ import ru.magomedcoder.askue.utils.Resource
 
 interface CounterRepository {
 
-    suspend fun fetchList(): Flow<Resource<List<ElectronicCounter>>>
+    suspend fun fetchList(
+        etFrom: String?,
+        etTo: String?,
+        etContractNumber: String?,
+        etSerialNumber: String?,
+        etLocality: String?,
+        etStreet: String?,
+        etNumber: String?,
+        etApartmentNumber: String?
+    ): Flow<Resource<List<ElectronicCounter>>>
 
 }

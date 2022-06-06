@@ -8,7 +8,7 @@ import ru.magomedcoder.askue.Constants
 import ru.magomedcoder.askue.data.remote.api.CounterApi
 import ru.magomedcoder.askue.data.repository.CounterRepositoryImpl
 import ru.magomedcoder.askue.domain.repository.CounterRepository
-import ru.magomedcoder.askue.domain.use_case.FetchElectronicCounterUseCase
+import ru.magomedcoder.askue.domain.useCase.FetchElectronicCounterUseCase
 import ru.magomedcoder.askue.ui.main.MainViewModel
 import ru.magomedcoder.askue.utils.NetworkHelper
 

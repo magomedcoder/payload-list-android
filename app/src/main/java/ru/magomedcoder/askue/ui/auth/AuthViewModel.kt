@@ -19,6 +19,9 @@ class AuthViewModel @Inject constructor(
     private val _authState = MutableStateFlow<AuthState>(AuthState.Empty)
     val authState = _authState.asStateFlow()
 
+    private val _userState = MutableStateFlow<UserState>(UserState.Empty)
+    val userState = _userState.asStateFlow()
+
     init {
         _authState.value = AuthState.Logged(repository.isToken())
     }
@@ -35,6 +38,25 @@ class AuthViewModel @Inject constructor(
                     AuthState.Failure(response.error ?: R.string.unknown_error.toString())
                 else -> Unit
             }
+        }
+    }
+
+    fun getUserInfo() = viewModelScope.launch {
+        when (val response = repository.userInfo()) {
+            is Resource.Success -> {
+                val data = response.data!!
+                _userState.value = UserState.Success(data)
+            }
+            is Resource.Error -> _userState.value =
+                UserState.Failure(response.error ?: R.string.unknown_error.toString())
+            else -> Unit
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            repository.removeToken()
+            _authState.value = AuthState.Logged(false)
         }
     }
 

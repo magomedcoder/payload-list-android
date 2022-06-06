@@ -25,15 +25,15 @@ class UserRepositoryImpl(
         return (sessionId != null)
     }
 
-    override fun getToken(): User? {
+    override fun getToken(): Login? {
         val token = userPreferences.getToken()
         return if (token != null)
-            User(token = token.toString())
+            Login(authToken = token.toString())
         else
             null
     }
 
-    override suspend fun removeToken() {
+    override fun removeToken() {
         userPreferences.removeToken()
     }
 
@@ -46,6 +46,19 @@ class UserRepositoryImpl(
         } catch (e: HttpException) {
             Resource.Error(error = e.message ?: R.string.unknown_error.toString())
         } catch (e: IOException) {
+            Resource.Error(error = e.message ?: R.string.unknown_error.toString())
+        }
+    }
+
+    override suspend fun userInfo(): Resource<User> {
+        return try {
+            val response = api
+                .doUserInfo()
+                .toUserDtoResponse()
+            Resource.Success(response)
+        } catch (e: IOException) {
+            Resource.Error(error = e.message ?: R.string.unknown_error.toString())
+        } catch (e: HttpException) {
             Resource.Error(error = e.message ?: R.string.unknown_error.toString())
         }
     }

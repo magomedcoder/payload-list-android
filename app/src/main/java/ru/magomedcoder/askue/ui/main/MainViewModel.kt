@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import ru.magomedcoder.askue.domain.use_case.FetchElectronicCounterUseCase
+import ru.magomedcoder.askue.domain.useCase.FetchElectronicCounterUseCase
 import ru.magomedcoder.askue.utils.Resource
 
 class MainViewModel(
@@ -21,11 +21,22 @@ class MainViewModel(
         getList()
     }
 
-    fun getList() = viewModelScope.launch {
-        fetchElectronicCounterUseCase().onEach { result ->
+    fun getList(
+        etFrom: String? = null,
+        etTo: String? = null,
+        etContractNumber: String? = null,
+        etSerialNumber: String? = null,
+        etLocality: String? = null,
+        etStreet: String? = null,
+        etNumber: String? = null,
+        etApartmentNumber: String? = null
+    ) = viewModelScope.launch {
+        fetchElectronicCounterUseCase(etFrom, etTo, etContractNumber, etSerialNumber, etLocality, etStreet, etNumber, etApartmentNumber).onEach { result ->
             when (result) {
-                is Resource.Success -> result.data?.let { response ->
-                    _mainState.value = MainState.Success(response = response)
+                is Resource.Success -> {
+                    result.data?.let { response ->
+                        _mainState.value = MainState.Success(response = response)
+                    }
                 }
                 is Resource.Loading -> _mainState.value = MainState.Loading
                 else -> Unit

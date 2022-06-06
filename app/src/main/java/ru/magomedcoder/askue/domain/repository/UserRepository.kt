@@ -10,10 +10,12 @@ interface UserRepository {
 
     fun isToken(): Boolean
 
-    fun getToken(): User?
+    fun getToken(): Login?
 
-    suspend fun removeToken()
+    fun removeToken()
 
     suspend fun login(username: String, password: String): Resource<Login>
+
+    suspend fun userInfo(): Resource<User>
 
 }

@@ -7,4 +7,25 @@
     <string name="authorization_failed">Авторизация не удалась</string>
     <string name="please_authorization">Пожалуйста, авторизуйтесь</string>
     <string name="welcome">Добро пожаловать</string>
+    <string name="you_have_successfully_logged_out">Вы успешно вышли из учетной записи</string>
+    <string name="reset">Сбросить</string>
+    <string name="search">Поиск</string>
+    <string name="apartment_number">Номер квартиры</string>
+    <string name="number">Номер</string>
+    <string name="found">Найдено</string>
+    <string name="from">От</string>
+    <string name="to">До</string>
+    <string name="contract_number">Номер договора</string>
+    <string name="serial_number">Серийный номер</string>
+    <string name="locality">Населенный пункт</string>
+    <string name="street">Улица</string>
+    <string name="installation_address">Адрес установки</string>
+    <string name="last_seen_at">Последние изменения</string>
+    <string name="personal_information">Персональная информация</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="organization">Организация</string>
+    <string name="email">Email</string>
+    <string name="phone">Номер телефона</string>
+    <string name="logout">Выйти</string>
 </resources>
