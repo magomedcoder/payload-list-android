@@ -24,15 +24,42 @@
         <action
             android:id="@+id/action_mainFragment_to_authFragment"
             app:destination="@id/authFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailElectronicCounterFragment"
         android:name="ru.magomedcoder.askue.ui.detail.DetailFragment"
         android:label="DetailElectronicCounterFragment"
         tools:layout="@layout/detail_electronic_counter">
-        <argument android:name="devEui"
-            app:argType="string"/>
-        <argument android:name="serN"
-            app:argType="string"/>
+        <argument
+            android:name="devEui"
+            app:argType="string" />
+        <argument
+            android:name="serN"
+            app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="ru.magomedcoder.askue.ui.event.EventFragment"
+        android:label="EventFragment"
+        tools:layout="@layout/fragment_event">
+        <action
+            android:id="@+id/action_eventFragment_to_archiveFragment"
+            app:destination="@id/archiveFragment" />
+        <action
+            android:id="@+id/action_eventFragment_to_outFragment"
+            app:destination="@id/outFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/archiveFragment"
+        android:name="ru.magomedcoder.askue.ui.archive.ArchiveFragment"
+        android:label="ArchiveFragment"
+        tools:layout="@layout/fragment_archive" />
+    <fragment
+        android:id="@+id/outFragment"
+        android:name="ru.magomedcoder.askue.ui.out.OutFragment"
+        android:label="OutFragment"
+        tools:layout="@layout/fragment_out" />
 </navigation>

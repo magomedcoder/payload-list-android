@@ -67,6 +67,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         binding.btnSearch.setOnClickListener {
             showSearchBox()
         }
+        binding.btnEvent.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_eventFragment)
+        }
         binding.btnAccount.setOnClickListener {
             showAccountBox()
         }

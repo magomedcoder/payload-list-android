@@ -18,7 +18,10 @@ import ru.magomedcoder.askue.data.repository.CounterRepositoryImpl
 import ru.magomedcoder.askue.data.repository.UserRepositoryImpl
 import ru.magomedcoder.askue.domain.repository.CounterRepository
 import ru.magomedcoder.askue.domain.repository.UserRepository
+import ru.magomedcoder.askue.domain.useCase.FetchElectronicArchiveUseCase
 import ru.magomedcoder.askue.domain.useCase.FetchElectronicCounterUseCase
+import ru.magomedcoder.askue.domain.useCase.FetchElectronicEventUseCase
+import ru.magomedcoder.askue.domain.useCase.FetchElectronicOutUseCase
 import ru.magomedcoder.askue.utils.network.AccessTokenAuthenticator
 import javax.inject.Singleton
 
@@ -82,13 +85,36 @@ class AppModule() {
     fun provideSharedPreferences(app: Application):
             SharedPreferences = app.getSharedPreferences(Constants.Pref.NAME, Context.MODE_PRIVATE)
 
-
     @Provides
     @Singleton
     fun provideFetchElectronicCounterUseCase(
         repository: CounterRepository
     ): FetchElectronicCounterUseCase {
         return FetchElectronicCounterUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFetchElectronicEventUseCase(
+        repository: CounterRepository
+    ): FetchElectronicEventUseCase {
+        return FetchElectronicEventUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFetchElectronicArchiveUseCase(
+        repository: CounterRepository
+    ): FetchElectronicArchiveUseCase {
+        return FetchElectronicArchiveUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFetchElectronicOutUseCase(
+        repository: CounterRepository
+    ): FetchElectronicOutUseCase {
+        return FetchElectronicOutUseCase(repository)
     }
 
 }

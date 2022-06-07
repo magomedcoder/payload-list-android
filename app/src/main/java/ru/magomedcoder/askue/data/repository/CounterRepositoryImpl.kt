@@ -4,7 +4,10 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import ru.magomedcoder.askue.R
 import ru.magomedcoder.askue.data.remote.api.CounterApi
+import ru.magomedcoder.askue.data.remote.toElectronicArchiveDomain
 import ru.magomedcoder.askue.data.remote.toElectronicCounterDomain
+import ru.magomedcoder.askue.data.remote.toElectronicEventDomain
+import ru.magomedcoder.askue.data.remote.toElectronicOutDomain
 import ru.magomedcoder.askue.domain.repository.CounterRepository
 import ru.magomedcoder.askue.utils.Resource
 import java.io.IOException
@@ -36,6 +39,42 @@ class CounterRepositoryImpl(
                 etApartmentNumber
             )
             emit(Resource.Success(data = data.results.map { it.toElectronicCounterDomain() }))
+        } catch (e: IOException) {
+            emit(Resource.Error(error = e.message ?: R.string.unknown_error.toString()))
+        } catch (e: HttpException) {
+            emit(Resource.Error(error = e.message ?: R.string.unknown_error.toString()))
+        }
+    }
+
+    override suspend fun fetchEventList() = flow {
+        emit(Resource.Loading())
+        try {
+            val data = api.doElectronicEventList()
+            emit(Resource.Success(data = data.results.map { it.toElectronicEventDomain() }))
+        } catch (e: IOException) {
+            emit(Resource.Error(error = e.message ?: R.string.unknown_error.toString()))
+        } catch (e: HttpException) {
+            emit(Resource.Error(error = e.message ?: R.string.unknown_error.toString()))
+        }
+    }
+
+    override suspend fun fetchArchiveList() = flow {
+        emit(Resource.Loading())
+        try {
+            val data = api.doElectronicArchiveList()
+            emit(Resource.Success(data = data.results.map { it.toElectronicArchiveDomain() }))
+        } catch (e: IOException) {
+            emit(Resource.Error(error = e.message ?: R.string.unknown_error.toString()))
+        } catch (e: HttpException) {
+            emit(Resource.Error(error = e.message ?: R.string.unknown_error.toString()))
+        }
+    }
+
+    override suspend fun fetchOutList() = flow {
+        emit(Resource.Loading())
+        try {
+            val data = api.doElectronicOutList()
+            emit(Resource.Success(data = data.results.map { it.toElectronicOutDomain() }))
         } catch (e: IOException) {
             emit(Resource.Error(error = e.message ?: R.string.unknown_error.toString()))
         } catch (e: HttpException) {

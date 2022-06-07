@@ -28,4 +28,9 @@
     <string name="email">Email</string>
     <string name="phone">Номер телефона</string>
     <string name="logout">Выйти</string>
+    <string name="archive">Архив</string>
+    <string name="date">Дата</string>
+    <string name="device_model">Модель устройства</string>
+    <string name="out_of_touch_for_over_week">Счетчики, не вышедшие на связь более недели</string>
+    <string name="counters_not_connected">Счетчики не на связи</string>
 </resources>
