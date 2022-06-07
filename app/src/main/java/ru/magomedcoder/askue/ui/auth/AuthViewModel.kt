@@ -1,6 +1,5 @@
 package ru.magomedcoder.askue.ui.auth
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -8,13 +7,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.magomedcoder.askue.R
 import ru.magomedcoder.askue.domain.repository.UserRepository
+import ru.magomedcoder.askue.ui.base.BaseViewModel
 import ru.magomedcoder.askue.utils.Resource
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val repository: UserRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _authState = MutableStateFlow<AuthState>(AuthState.Empty)
     val authState = _authState.asStateFlow()
@@ -46,7 +46,7 @@ class AuthViewModel @Inject constructor(
             is Resource.Success -> {
                 val data = response.data!!
                 val organizationId = repository.userInfo().data!!
-                if (repository.isOrganizationId()) {
+                if (!repository.isOrganizationId()) {
                     repository.saveOrganizationId(organizationId.organizationId)
                 }
                 _userState.value = UserState.Success(data)

@@ -9,7 +9,7 @@ import ru.magomedcoder.askue.utils.Resource
 
 interface CounterRepository {
 
-    suspend fun fetchList(
+    fun fetchList(
         etFrom: String?,
         etTo: String?,
         etContractNumber: String?,
@@ -20,11 +20,10 @@ interface CounterRepository {
         etApartmentNumber: String?
     ): Flow<Resource<List<ElectronicCounter>>>
 
+    fun fetchEventList(): Flow<Resource<List<ElectronicEvent>>>
 
-    suspend fun fetchEventList(): Flow<Resource<List<ElectronicEvent>>>
+    fun fetchArchiveList(): Flow<Resource<List<ElectronicArchive>>>
 
-    suspend fun fetchArchiveList(): Flow<Resource<List<ElectronicArchive>>>
-
-    suspend fun fetchOutList(): Flow<Resource<List<ElectronicOut>>>
+    fun fetchOutList(): Flow<Resource<List<ElectronicOut>>>
 
 }

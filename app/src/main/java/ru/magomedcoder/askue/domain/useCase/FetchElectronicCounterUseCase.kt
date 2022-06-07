@@ -6,7 +6,7 @@ class FetchElectronicCounterUseCase(
     private val repository: CounterRepository
 ) {
 
-    suspend operator fun invoke(
+    operator fun invoke(
         etFrom: String?,
         etTo: String?,
         etContractNumber: String?,

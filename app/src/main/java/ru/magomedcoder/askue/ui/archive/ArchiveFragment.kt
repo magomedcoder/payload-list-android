@@ -1,10 +1,12 @@
 package ru.magomedcoder.askue.ui.archive
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +21,7 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding>() {
     private val viewModel: ArchiveViewModel by viewModels()
     private lateinit var adapter: ArchiveAdapter
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -29,6 +32,7 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding>() {
         observeDetails()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupAdapter() {
         adapter = ArchiveAdapter()
         binding.rvItems.adapter = adapter

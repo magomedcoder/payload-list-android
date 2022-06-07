@@ -1,5 +1,6 @@
 package ru.magomedcoder.askue.ui.archive.adapter
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
@@ -9,6 +10,7 @@ import ru.magomedcoder.askue.ui.base.DisplayableItem
 
 object ArchiveAdapterDelegate {
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     fun mainAdapterDelegate() =
         adapterDelegateViewBinding<ElectronicArchive, DisplayableItem, ItemElectronicEventBinding>(

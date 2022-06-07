@@ -1,10 +1,12 @@
 package ru.magomedcoder.askue.ui.out
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +21,7 @@ class OutFragment : BaseFragment<FragmentOutBinding>() {
     private val viewModel: OutViewModel by viewModels()
     private lateinit var adapter: OutAdapter
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -29,6 +32,7 @@ class OutFragment : BaseFragment<FragmentOutBinding>() {
         observeDetails()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupAdapter() {
         adapter = OutAdapter()
         binding.rvItems.adapter = adapter

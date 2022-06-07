@@ -6,6 +6,6 @@ class FetchElectronicArchiveUseCase(
     private val repository: CounterRepository
 ) {
 
-    suspend operator fun invoke() = repository.fetchArchiveList()
+    operator fun invoke() = repository.fetchArchiveList()
 
 }

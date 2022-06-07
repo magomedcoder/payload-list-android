@@ -6,6 +6,6 @@ class FetchElectronicOutUseCase(
     private val repository: CounterRepository
 ) {
 
-    suspend operator fun invoke() = repository.fetchOutList()
+    operator fun invoke() = repository.fetchOutList()
 
 }

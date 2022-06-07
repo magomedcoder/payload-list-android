@@ -28,6 +28,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                         Toast
                             .makeText(activity, R.string.welcome, Toast.LENGTH_SHORT)
                             .show()
+                        viewModel.getUserInfo()
                     }
                     is AuthState.Failure -> {
                         Toast

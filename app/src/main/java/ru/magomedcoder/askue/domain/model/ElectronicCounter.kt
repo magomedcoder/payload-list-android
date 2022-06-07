@@ -12,11 +12,4 @@ data class ElectronicCounter(
 
     override val itemId: String get() = serN
 
-    data class PlaceAddress(
-        val city: String,
-        val number: Int,
-        val street: String,
-        val unit: String
-    )
-
 }

@@ -6,6 +6,6 @@ class FetchElectronicEventUseCase(
     private val repository: CounterRepository
 ) {
 
-    suspend operator fun invoke() = repository.fetchEventList()
+    operator fun invoke() = repository.fetchEventList()
 
 }

@@ -23,6 +23,7 @@ import ru.magomedcoder.askue.domain.useCase.FetchElectronicCounterUseCase
 import ru.magomedcoder.askue.domain.useCase.FetchElectronicEventUseCase
 import ru.magomedcoder.askue.domain.useCase.FetchElectronicOutUseCase
 import ru.magomedcoder.askue.utils.network.AccessTokenAuthenticator
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -38,6 +39,8 @@ class AppModule() {
             .client(
                 OkHttpClient.Builder()
                     .authenticator(accessTokenAuthenticator)
+                    .readTimeout(Constants.NETWORK_CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
+                    .writeTimeout(Constants.NETWORK_CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
                     .build()
             )
             .baseUrl(Constants.Api.URL)
@@ -55,6 +58,8 @@ class AppModule() {
             .client(
                 OkHttpClient.Builder()
                     .authenticator(accessTokenAuthenticator)
+                    .readTimeout(Constants.NETWORK_CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
+                    .writeTimeout(Constants.NETWORK_CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
                     .build()
             )
             .baseUrl(Constants.Api.URL)
@@ -75,9 +80,10 @@ class AppModule() {
     @Provides
     @Singleton
     fun provideCounterRepository(
-        counterApi: CounterApi
+        counterApi: CounterApi,
+        userPreferences: UserPreferences
     ): CounterRepository {
-        return CounterRepositoryImpl(counterApi)
+        return CounterRepositoryImpl(counterApi, userPreferences)
     }
 
     @Provides

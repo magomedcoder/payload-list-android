@@ -6,24 +6,11 @@ class ElectronicArchive(
     val id: Int,
     val alarmReset: Boolean,
     val dateTime: String,
-    val event: ElectronicEvent.Event,
+    val event: Event,
     val modelOfDevice: String,
-    val placeAddress: ElectronicEvent.PlaceAddress
+    val placeAddress: PlaceAddress
 ) : DisplayableItem {
 
     override val itemId: String get() = id.toString()
-
-    data class Event(
-        //  val orangeLevel: Any,
-        //   val redLevel: Any,
-        val yellowLevel: String
-    )
-
-    data class PlaceAddress(
-        val city: String,
-        val number: Int,
-        val street: String,
-        val unit: String
-    )
 
 }

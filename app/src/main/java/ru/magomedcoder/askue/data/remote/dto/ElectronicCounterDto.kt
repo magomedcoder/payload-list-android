@@ -16,16 +16,9 @@ data class ElectronicCounterDto(
     val organization_id: Int,
     val payload: Payload,
     val personal_account: String,
-    val place_address: PlaceAddress,
+    val place_address: PlaceAddressDto,
     val sequence_number: Int
 ) {
-
-    data class PlaceAddress(
-        val city: String,
-        val number: Int,
-        val street: String,
-        val unit: String
-    )
 
     data class Payload(
         val Curr: Int,

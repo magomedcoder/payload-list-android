@@ -56,7 +56,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                             findNavController().navigate(R.id.action_mainFragment_to_authFragment)
                         }
                     }
-                    else -> {}
+                    else -> Unit
                 }
             }
         }
@@ -73,7 +73,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         binding.btnAccount.setOnClickListener {
             showAccountBox()
         }
-        setupAdapter()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            setupAdapter()
+        }
         observeMainDetails()
         binding.tvFound.visibility = GONE
         binding.tvFound.text = "Найдено: "
@@ -178,7 +180,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                         email.text = state.response.email
                         phoneNumber.text = state.response.phoneNumber
                     }
-                    else -> {}
+                    else -> Unit
                 }
             }
         }
@@ -187,8 +189,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupAdapter() {
-        adapter = ElectronicCounterAdapter() { item ->
+        adapter = ElectronicCounterAdapter { item ->
             findNavController()
                 .navigate(
                     MainFragmentDirections

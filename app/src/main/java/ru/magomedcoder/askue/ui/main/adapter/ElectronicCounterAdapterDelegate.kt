@@ -1,5 +1,6 @@
 package ru.magomedcoder.askue.ui.main.adapter
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
@@ -10,6 +11,7 @@ import ru.magomedcoder.askue.utils.convertFormatDateFromIso
 
 object ElectronicCounterAdapterDelegate {
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     fun mainAdapterDelegate(onGoToDetail: (ElectronicCounter) -> Unit) =
         adapterDelegateViewBinding<ElectronicCounter, DisplayableItem, ItemElectronicCounterBinding>(

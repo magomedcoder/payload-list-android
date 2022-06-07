@@ -8,22 +8,9 @@ class ElectronicEvent(
     val dateTime: String,
     val event: Event,
     val modelOfDevice: String,
-    val placeAddress: PlaceAddress
+    val placeAddress: PlaceAddress,
 ) : DisplayableItem {
 
     override val itemId: String get() = id.toString()
-
-    data class Event(
-      //  val orangeLevel: Any,
-     //   val redLevel: Any,
-        val yellowLevel: String
-    )
-
-    data class PlaceAddress(
-        val city: String,
-        val number: Int,
-        val street: String,
-        val unit: String
-    )
 
 }

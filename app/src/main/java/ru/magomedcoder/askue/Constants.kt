@@ -12,4 +12,6 @@ object Constants {
         const val ORGANIZATION_ID = "PREF_KEY_ORGANIZATION_ID"
     }
 
+    const val NETWORK_CALL_TIMEOUT = 60
+
 }

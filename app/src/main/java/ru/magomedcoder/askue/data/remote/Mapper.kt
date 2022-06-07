@@ -4,16 +4,13 @@ import ru.magomedcoder.askue.data.remote.dto.ElectronicArchiveDto
 import ru.magomedcoder.askue.data.remote.dto.ElectronicCounterDto
 import ru.magomedcoder.askue.data.remote.dto.ElectronicEventDto
 import ru.magomedcoder.askue.data.remote.dto.ElectronicOutDto
-import ru.magomedcoder.askue.domain.model.ElectronicArchive
-import ru.magomedcoder.askue.domain.model.ElectronicCounter
-import ru.magomedcoder.askue.domain.model.ElectronicEvent
-import ru.magomedcoder.askue.domain.model.ElectronicOut
+import ru.magomedcoder.askue.domain.model.*
 
 fun ElectronicCounterDto.toElectronicCounterDomain(): ElectronicCounter {
     return ElectronicCounter(
         devEui = dev_eui,
         serN = SerN,
-        placeAddress = ElectronicCounter.PlaceAddress(
+        placeAddress = PlaceAddress(
             city = place_address.city,
             street = place_address.street,
             unit = place_address.unit,
@@ -29,13 +26,13 @@ fun ElectronicEventDto.toElectronicEventDomain(): ElectronicEvent {
         id = id,
         alarmReset = alarm_reset,
         dateTime = date_time,
-        event = ElectronicEvent.Event(
-          //  orangeLevel = event.orange_level,
-           // redLevel = event.red_level,
+        event = Event(
+            orangeLevel = event.orange_level,
+            redLevel = event.red_level,
             yellowLevel = event.yellow_level
         ),
         modelOfDevice = model_of_device,
-        placeAddress = ElectronicEvent.PlaceAddress(
+        placeAddress = PlaceAddress(
             city = place_address.city,
             street = place_address.street,
             unit = place_address.unit,
@@ -49,13 +46,13 @@ fun ElectronicArchiveDto.toElectronicArchiveDomain(): ElectronicArchive {
         id = id,
         alarmReset = alarm_reset,
         dateTime = date_time,
-        event = ElectronicEvent.Event(
-            //  orangeLevel = event.orange_level,
-            // redLevel = event.red_level,
+        event = Event(
+            orangeLevel = event.orange_level,
+            redLevel = event.red_level,
             yellowLevel = event.yellow_level
         ),
         modelOfDevice = model_of_device,
-        placeAddress = ElectronicEvent.PlaceAddress(
+        placeAddress = PlaceAddress(
             city = place_address.city,
             street = place_address.street,
             unit = place_address.unit,
@@ -70,7 +67,7 @@ fun ElectronicOutDto.toElectronicOutDomain(): ElectronicOut {
         devEui = dev_eui,
         lastSeenAt = last_seen_at,
         personalAccount = personal_account,
-        placeAddress = ElectronicOut.PlaceAddress(
+        placeAddress = PlaceAddress(
             city = place_address.city,
             street = place_address.street,
             unit = place_address.unit,

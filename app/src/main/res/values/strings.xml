@@ -33,4 +33,6 @@
     <string name="device_model">Модель устройства</string>
     <string name="out_of_touch_for_over_week">Счетчики, не вышедшие на связь более недели</string>
     <string name="counters_not_connected">Счетчики не на связи</string>
+    <string name="network_connection_error">Интернет-соединение потеряно, повторите попытку</string>
+    <string name="try_again">Что-то пошло не так Попробуйте еще раз</string>
 </resources>
