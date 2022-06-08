@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="300dp"
         android:layout_margin="10dp"
         android:orientation="vertical"
         tools:ignore="UselessParent">
@@ -46,63 +46,31 @@
                 android:padding="10dp" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/etContractNumber"
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/edit_text"
-            android:ems="10"
-            android:hint="@string/contract_number"
-            android:inputType="number"
-            tools:ignore="TextFields" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etSerialNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/edit_text"
-            android:ems="10"
-            android:hint="@string/serial_number"
-            android:inputType="number"
-            tools:ignore="TextFields" />
+            <CheckBox
+                android:id="@+id/cbRed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Высокий уровень"
+                android:textColor="#dc3545" />
 
-        <EditText
-            android:id="@+id/etLocality"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/edit_text"
-            android:ems="10"
-            android:hint="@string/locality"
-            android:inputType="textPersonName" />
+            <CheckBox
+                android:id="@+id/cbOrange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Средний уровень"
+                android:textColor="#ffc107" />
 
-        <EditText
-            android:id="@+id/etStreet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/edit_text"
-            android:ems="10"
-            android:hint="@string/street"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/edit_text"
-            android:ems="10"
-            android:hint="@string/number"
-            android:inputType="number"
-            tools:ignore="TextFields" />
-
-        <EditText
-            android:id="@+id/etApartmentNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/edit_text"
-            android:ems="10"
-            android:hint="@string/apartment_number"
-            android:inputType="number"
-            tools:ignore="TextFields" />
+            <CheckBox
+                android:id="@+id/cbYellow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Низкий уровень"
+                android:textColor="#28a745" />
+        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"

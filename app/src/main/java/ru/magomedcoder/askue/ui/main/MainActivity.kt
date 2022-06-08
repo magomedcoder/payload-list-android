@@ -1,12 +1,12 @@
 package ru.magomedcoder.askue.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
 import ru.magomedcoder.askue.R
+import ru.magomedcoder.askue.ui.base.BaseActivity
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -20,12 +20,8 @@ class ArchiveViewModel @Inject constructor(
     private val _archiveState = MutableStateFlow<ArchiveState>(ArchiveState.Empty)
     val archiveState = _archiveState.asStateFlow()
 
-    init {
-        getList()
-    }
-
-    fun getList() = viewModelScope.launch {
-        useCase().onEach { result ->
+    fun getList(startDate: String?, endDate: String?) = viewModelScope.launch {
+        useCase(startDate, endDate).onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     result.data?.let { response ->

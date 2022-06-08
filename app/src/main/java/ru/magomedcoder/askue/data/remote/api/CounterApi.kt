@@ -2,10 +2,7 @@ package ru.magomedcoder.askue.data.remote.api
 
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.magomedcoder.askue.data.remote.response.ElectronicArchiveResponse
-import ru.magomedcoder.askue.data.remote.response.ElectronicEventResponse
-import ru.magomedcoder.askue.data.remote.response.ElectronicCounterResponse
-import ru.magomedcoder.askue.data.remote.response.ElectronicOutResponse
+import ru.magomedcoder.askue.data.remote.response.*
 import javax.inject.Singleton
 
 @Singleton
@@ -36,8 +33,8 @@ interface CounterApi {
         @Query("organization_id") organizationId: Int?,
         @Query("start_date") startDate: String?,
         @Query("end_date") endDate: String?,
-        @Query("red_level") redLevel: Int?,
-        @Query("orange_level") orangeLevel: Int?,
+        @Query("red_level") redLevel: Boolean?,
+        @Query("orange_level") orangeLevel: Boolean?,
         @Query("yellow_level") yellowLevel: Boolean?,
         @Query("detail") detail: Boolean?
     ): ElectronicArchiveResponse
@@ -47,5 +44,9 @@ interface CounterApi {
         @Query("page") page: Int?,
         @Query("day") day: Int?
     ): ElectronicOutResponse
+
+
+    @GET("http://10.11.58.31:8192/scadaapi/badgealerts")
+    suspend fun doEventCounter(): EventCounterResponse
 
 }

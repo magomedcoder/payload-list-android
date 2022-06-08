@@ -26,6 +26,9 @@ import ru.magomedcoder.askue.ui.main.adapter.ElectronicCounterAdapter
 import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
+import ru.magomedcoder.askue.ui.base.BackPressHandler
+import ru.magomedcoder.askue.ui.base.BackPressRegistrar
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>() {
@@ -35,9 +38,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private lateinit var adapter: ElectronicCounterAdapter
 
+    var backPressedTime: Long = 0
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // viewModel.getList() // TODO
+        viewModel.getCounter()
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             loginViewModel.authState.collect { state ->
                 when (state) {
@@ -50,9 +57,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                                     Toast.LENGTH_SHORT
                                 )
                                 .show()
-
                             loginViewModel.getUserInfo()
-
                             findNavController().navigate(R.id.action_mainFragment_to_authFragment)
                         }
                     }
@@ -62,6 +67,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         }
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.getList()
+            viewModel.getCounter()
             binding.swipeRefreshLayout.isRefreshing = false
         }
         binding.btnSearch.setOnClickListener {
@@ -76,7 +82,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setupAdapter()
         }
-        observeMainDetails()
+        observeDetails()
         binding.tvFound.visibility = GONE
         binding.tvFound.text = "Найдено: "
     }
@@ -196,7 +202,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 .navigate(
                     MainFragmentDirections
                         .actionMainFragmentToDetailElectronicCounterFragment(
-                            devEui = item.devEui,
+                            personalAccount = item.personalAccount,
                             serN = item.serN
                         )
                 )
@@ -204,7 +210,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         binding.rvCounterItems.adapter = adapter
     }
 
-    private fun observeMainDetails() {
+    private fun observeDetails() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.mainState.collect { state ->
                 when (state) {
@@ -218,10 +224,50 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 }
             }
         }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.mainState.collect { state ->
+                when (state) {
+                    is MainState.Counter -> {
+                        binding.apply {
+                            tvRed.text = state.event.redLevel
+                            tvOrange.text = state.event.orangeLevel
+                            tvYellow.text = state.event.yellowLevel
+                        }
+                    }
+                    else -> Unit
+                }
+            }
+        }
     }
 
     private fun bindData(item: List<ElectronicCounter>) {
         adapter.items = item
+    }
+
+    lateinit var backToast: Toast
+
+    private val backPressHandler = object : BackPressHandler {
+        override fun onBackPressed(): Boolean {
+            backToast = Toast.makeText(activity, R.string.press_back_leave_app, Toast.LENGTH_SHORT)
+            if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                backToast.cancel()
+                exitProcess(0)
+            } else {
+                backToast.show()
+            }
+            backPressedTime = System.currentTimeMillis()
+            return false
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as? BackPressRegistrar)?.registerHandler(backPressHandler)
+    }
+
+    override fun onStop() {
+        (activity as? BackPressRegistrar)?.unregisterHandler(backPressHandler)
+        super.onStop()
     }
 
     override fun initBinding(

@@ -13,11 +13,11 @@ class DetailFragment : BaseFragment<DetailElectronicCounterBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val devEui = arguments?.getString("devEui")
+        val personalAccount = arguments?.getString("personalAccount")
         val serN = arguments?.getString("serN")
         binding.apply {
+            tvPersonalAccount.text = personalAccount
             tvSerN.text = serN
-            tvDevEui.text = devEui
         }
     }
 

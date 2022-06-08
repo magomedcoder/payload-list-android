@@ -6,6 +6,6 @@ class FetchElectronicArchiveUseCase(
     private val repository: CounterRepository
 ) {
 
-    operator fun invoke() = repository.fetchArchiveList()
+    operator fun invoke(startDate: String?, endDate: String?) = repository.fetchArchiveList(startDate, endDate)
 
 }

@@ -1,10 +1,7 @@
 package ru.magomedcoder.askue.domain.repository
 
 import kotlinx.coroutines.flow.Flow
-import ru.magomedcoder.askue.domain.model.ElectronicArchive
-import ru.magomedcoder.askue.domain.model.ElectronicCounter
-import ru.magomedcoder.askue.domain.model.ElectronicEvent
-import ru.magomedcoder.askue.domain.model.ElectronicOut
+import ru.magomedcoder.askue.domain.model.*
 import ru.magomedcoder.askue.utils.Resource
 
 interface CounterRepository {
@@ -20,9 +17,11 @@ interface CounterRepository {
         etApartmentNumber: String?
     ): Flow<Resource<List<ElectronicCounter>>>
 
+    suspend fun eventCounter(): Resource<Event>
+
     fun fetchEventList(): Flow<Resource<List<ElectronicEvent>>>
 
-    fun fetchArchiveList(): Flow<Resource<List<ElectronicArchive>>>
+    fun fetchArchiveList(startDate: String?, endDate: String?): Flow<Resource<List<ElectronicArchive>>>
 
     fun fetchOutList(): Flow<Resource<List<ElectronicOut>>>
 

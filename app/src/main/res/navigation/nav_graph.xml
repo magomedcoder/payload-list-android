@@ -34,7 +34,7 @@
         android:label="DetailElectronicCounterFragment"
         tools:layout="@layout/detail_electronic_counter">
         <argument
-            android:name="devEui"
+            android:name="personalAccount"
             app:argType="string" />
         <argument
             android:name="serN"

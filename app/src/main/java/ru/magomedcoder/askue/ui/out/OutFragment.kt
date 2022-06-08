@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import ru.magomedcoder.askue.R
 import ru.magomedcoder.askue.databinding.FragmentOutBinding
 import ru.magomedcoder.askue.domain.model.ElectronicOut
 import ru.magomedcoder.askue.ui.base.BaseFragment
@@ -24,6 +26,9 @@ class OutFragment : BaseFragment<FragmentOutBinding>() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.getList()
             binding.swipeRefreshLayout.isRefreshing = false

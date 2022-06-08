@@ -37,34 +37,21 @@
         android:id="@+id/btnSearch"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/btnAccount"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_txt_title"
         app:srcCompat="@drawable/ic_search" />
-
-    <ImageView
-        android:id="@+id/btnEvent"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="24dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/btnAccount"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_event" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="409dp"
-        android:layout_height="680dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/btnAccount"
+        android:layout_height="645dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/eventEvent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp">
 
@@ -81,11 +68,81 @@
         android:id="@+id/tvFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="16dp"
         android:text="@string/found"
-        app:layout_constraintBottom_toTopOf="@+id/swipeRefreshLayout"
+        app:layout_constraintStart_toEndOf="@+id/btnSearch"
         app:layout_constraintTop_toBottomOf="@+id/home_txt_title"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="112dp" />
+        tools:ignore="MissingConstraints" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/eventEvent"
+        android:layout_width="165dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnEvent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="События"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvRed"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/circle_counter_danger"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_event" />
+
+            <TextView
+                android:id="@+id/tvOrange"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/circle_counter_warning"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/tvRed"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_event" />
+
+            <TextView
+                android:id="@+id/tvYellow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/circle_counter_success"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/tvOrange"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_event" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

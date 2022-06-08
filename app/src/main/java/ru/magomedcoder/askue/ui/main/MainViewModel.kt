@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import ru.magomedcoder.askue.domain.model.Event
+import ru.magomedcoder.askue.domain.repository.CounterRepository
 import ru.magomedcoder.askue.domain.useCase.FetchElectronicCounterUseCase
 import ru.magomedcoder.askue.ui.base.BaseViewModel
 import ru.magomedcoder.askue.utils.Resource
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val fetchElectronicCounterUseCase: FetchElectronicCounterUseCase
+    private val fetchElectronicCounterUseCase: FetchElectronicCounterUseCase,
+    private val counterRepository: CounterRepository
 ) : BaseViewModel() {
 
     private val _mainState = MutableStateFlow<MainState>(MainState.Empty)
@@ -22,6 +25,7 @@ class MainViewModel @Inject constructor(
 
     init {
         getList()
+        getCounter()
     }
 
     fun getList(
@@ -54,6 +58,21 @@ class MainViewModel @Inject constructor(
                 else -> Unit
             }
         }.launchIn(this)
+    }
+
+    fun getCounter() = viewModelScope.launch {
+        when (val response = counterRepository.eventCounter()) {
+            is Resource.Success -> {
+                _mainState.value = MainState.Counter(
+                    event = Event(
+                        orangeLevel = response.data?.orangeLevel,
+                        redLevel = response.data?.redLevel,
+                        yellowLevel = response.data?.yellowLevel
+                    )
+                )
+            }
+            else -> Unit
+        }
     }
 
 }
