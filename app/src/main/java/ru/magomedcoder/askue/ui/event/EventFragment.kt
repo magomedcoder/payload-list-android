@@ -38,6 +38,7 @@ class EventFragment : BaseFragment<FragmentEventBinding>() {
             findNavController().navigate(R.id.action_eventFragment_to_outFragment)
 
         }
+        binding.tvCenterText.text = getString(R.string.data_wait_please)
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.getList()
             binding.swipeRefreshLayout.isRefreshing = false
@@ -59,6 +60,11 @@ class EventFragment : BaseFragment<FragmentEventBinding>() {
                     is EventState.Success -> {
                         bindData(item = state.response)
                         binding.swipeRefreshLayout.isRefreshing = false
+                        if (state.response.isEmpty()) {
+                            binding.tvCenterText.text = getString(R.string.nothing_found)
+                        } else {
+                            binding.tvCenterText.visibility = View.GONE
+                        }
                     }
                     is EventState.Failure -> Log.d("DetailError", state.error)
                     is EventState.Loading -> binding.swipeRefreshLayout.isRefreshing = true

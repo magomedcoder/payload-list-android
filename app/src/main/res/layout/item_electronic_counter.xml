@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/counterItem"
@@ -12,9 +15,20 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:orientation="vertical"
+        android:paddingTop="5dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="166dp"
         tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/imageViewAddress"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="4dp"
+            android:contentDescription="@string/installation_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_address" />
 
         <TextView
             android:id="@+id/tvAddress"
@@ -26,22 +40,43 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
+        <ImageView
+            android:id="@+id/imageViewSerN"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="3dp"
+            android:contentDescription="@string/serial_number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_serial_number" />
+
         <TextView
             android:id="@+id/tvSerN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="3dp"
             android:text="@string/serial_number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageViewSerN"
             tools:ignore="MissingConstraints" />
 
+        <ImageView
+            android:id="@+id/imageViewPersonalAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/contract_number"
+            app:layout_constraintEnd_toStartOf="@+id/tvPersonalAccount"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_account_card" />
+
         <TextView
             android:id="@+id/tvPersonalAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="4dp"
             android:text="@string/contract_number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,57 +84,28 @@
 
         <TextView
             android:id="@+id/tvLastSeenAt"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="3dp"
             android:text="@string/last_seen_at"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:id="@+id/imageViewAddress"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_address" />
-
-        <ImageView
-            android:id="@+id/imageViewPersonalAccount"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/tvPersonalAccount"
-            app:layout_constraintHorizontal_bias="0.962"
-            app:layout_constraintStart_toEndOf="@+id/tvAddress"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_account_card" />
-
-        <ImageView
             android:id="@+id/imageViewLastSeenAt"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="3dp"
+            android:contentDescription="@string/last_seen_at"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvLastSeenAt"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/tvSerN"
             app:srcCompat="@drawable/ic_calendar_time" />
 
-        <ImageView
-            android:id="@+id/imageViewSerN"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_serial_number" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

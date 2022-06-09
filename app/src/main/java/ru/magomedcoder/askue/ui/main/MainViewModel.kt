@@ -23,11 +23,6 @@ class MainViewModel @Inject constructor(
     private val _mainState = MutableStateFlow<MainState>(MainState.Empty)
     val mainState = _mainState.asStateFlow()
 
-    init {
-        getList()
-        getCounter()
-    }
-
     fun getList(
         etFrom: String? = null,
         etTo: String? = null,

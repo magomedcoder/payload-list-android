@@ -54,21 +54,21 @@
                 android:id="@+id/cbRed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Высокий уровень"
+                android:text="@string/high_level"
                 android:textColor="#dc3545" />
 
             <CheckBox
                 android:id="@+id/cbOrange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Средний уровень"
+                android:text="@string/average_level"
                 android:textColor="#ffc107" />
 
             <CheckBox
                 android:id="@+id/cbYellow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Низкий уровень"
+                android:text="@string/low_level"
                 android:textColor="#28a745" />
         </RadioGroup>
 
@@ -87,6 +87,7 @@
 
             <Button
                 android:id="@+id/btnSearch"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"

@@ -36,4 +36,21 @@
     <string name="network_connection_error">Интернет-соединение потеряно, повторите попытку</string>
     <string name="try_again">Что-то пошло не так Попробуйте еще раз</string>
     <string name="press_back_leave_app">Нажмите еще раз, чтобы выйти из приложения.</string>
+    <string name="counter">Счетчик</string>
+    <string name="address">Адрес</string>
+    <string name="time_last_reading">Время последнего показания</string>
+    <string name="indications">Показания</string>
+    <string name="status_check">Проверка статуса</string>
+    <string name="unknown">Неизвестно</string>
+    <string name="beginning_period_kWh">На начало периода, кВт/ч</string>
+    <string name="end_period_kWh">На конец периода, кВт/ч</string>
+    <string name="for_period_kW_h">За период, кВт/ч</string>
+    <string name="back">Назад</string>
+    <string name="event">События</string>
+    <string name="high_level">Высокий уровень</string>
+    <string name="average_level">Средний уровень</string>
+    <string name="low_level">Низкий уровень</string>
+    <string name="data_wait_please">Данные загружаются. Пожалуйста, подождите.</string>
+    <string name="search_parameters_specified">Параметры поиска не указаны.</string>
+    <string name="nothing_found">Ничего не найдено</string>
 </resources>

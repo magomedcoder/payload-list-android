@@ -1,18 +1,15 @@
 package ru.magomedcoder.askue.data.repository
 
-import android.util.Log
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import ru.magomedcoder.askue.R
 import ru.magomedcoder.askue.data.local.UserPreferences
 import ru.magomedcoder.askue.data.remote.api.CounterApi
-import ru.magomedcoder.askue.data.remote.request.AuthRequest
 import ru.magomedcoder.askue.data.remote.toElectronicArchiveDomain
 import ru.magomedcoder.askue.data.remote.toElectronicCounterDomain
 import ru.magomedcoder.askue.data.remote.toElectronicEventDomain
 import ru.magomedcoder.askue.data.remote.toElectronicOutDomain
 import ru.magomedcoder.askue.domain.model.Event
-import ru.magomedcoder.askue.domain.model.Login
 import ru.magomedcoder.askue.domain.repository.CounterRepository
 import ru.magomedcoder.askue.utils.Resource
 import java.io.IOException

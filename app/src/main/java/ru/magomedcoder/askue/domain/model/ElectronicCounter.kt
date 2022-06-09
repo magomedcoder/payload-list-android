@@ -8,6 +8,10 @@ data class ElectronicCounter(
     val placeAddress: PlaceAddress,
     val lastSeenAt: String,
     val personalAccount: String,
+    val deviceProfileName: String,
+    val firstPeriodCurrency: String,
+    val lastPeriodCurrency: String,
+    val allPeriodCurrency: String,
 ) : DisplayableItem {
 
     override val itemId: String get() = serN

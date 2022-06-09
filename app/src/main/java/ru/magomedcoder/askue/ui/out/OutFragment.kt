@@ -29,6 +29,7 @@ class OutFragment : BaseFragment<FragmentOutBinding>() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.tvCenterText.text = getString(R.string.data_wait_please)
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.getList()
             binding.swipeRefreshLayout.isRefreshing = false
@@ -50,6 +51,11 @@ class OutFragment : BaseFragment<FragmentOutBinding>() {
                     is OutState.Success -> {
                         bindData(item = state.response)
                         binding.swipeRefreshLayout.isRefreshing = false
+                        if (state.response.isEmpty()) {
+                            binding.tvCenterText.text = getString(R.string.nothing_found)
+                        } else {
+                            binding.tvCenterText.visibility = View.GONE
+                        }
                     }
                     is OutState.Failure -> Log.d("DetailError", state.error)
                     is OutState.Loading -> binding.swipeRefreshLayout.isRefreshing = true

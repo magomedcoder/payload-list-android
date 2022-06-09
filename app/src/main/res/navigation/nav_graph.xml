@@ -19,26 +19,11 @@
         android:label="MainFragment"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_detailElectronicCounterFragment"
-            app:destination="@id/detailElectronicCounterFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_authFragment"
             app:destination="@id/authFragment" />
         <action
             android:id="@+id/action_mainFragment_to_eventFragment"
             app:destination="@id/eventFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailElectronicCounterFragment"
-        android:name="ru.magomedcoder.askue.ui.detail.DetailFragment"
-        android:label="DetailElectronicCounterFragment"
-        tools:layout="@layout/detail_electronic_counter">
-        <argument
-            android:name="personalAccount"
-            app:argType="string" />
-        <argument
-            android:name="serN"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/eventFragment"

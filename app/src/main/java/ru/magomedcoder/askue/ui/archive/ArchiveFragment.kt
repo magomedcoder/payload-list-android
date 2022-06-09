@@ -36,6 +36,7 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding>() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.tvCenterText.text = getString(R.string.search_parameters_specified)
         var swipeRefreshLayout = false
         setupAdapter()
         observeDetails()
@@ -138,6 +139,7 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding>() {
             etTo.text = null
         }
         btnSearch.setOnClickListener {
+            binding.tvCenterText.text = getString(R.string.data_wait_please)
             viewModel.getList(etFrom.text.toString(), etTo.text.toString())
             messageBoxInstance.dismiss()
         }
@@ -160,6 +162,11 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding>() {
                     is ArchiveState.Success -> {
                         bindData(item = state.response)
                         binding.swipeRefreshLayout.isRefreshing = false
+                        if (state.response.isEmpty()) {
+                            binding.tvCenterText.text = getString(R.string.nothing_found)
+                        } else {
+                            binding.tvCenterText.visibility = View.GONE
+                        }
                     }
                     is ArchiveState.Failure -> Log.d("DetailError", state.error)
                     is ArchiveState.Loading -> binding.swipeRefreshLayout.isRefreshing = true

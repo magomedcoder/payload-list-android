@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
-                android:textColor="#535b63" />
+                android:textColor="@color/color_item_title" />
         </LinearLayout>
 
         <LinearLayout
@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/surname"
-                android:textColor="#535b63" />
+                android:textColor="@color/color_item_title" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/organization"
-                android:textColor="#535b63" />
+                android:textColor="@color/color_item_title" />
         </LinearLayout>
 
         <LinearLayout
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
-                android:textColor="#535b63" />
+                android:textColor="@color/color_item_title" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,14 +117,14 @@
                 android:layout_width="118dp"
                 android:layout_height="wrap_content"
                 android:text="@string/phone"
-                android:textColor="#a5aeb3" />
+                android:textColor="@color/color_item_title" />
 
             <TextView
                 android:id="@+id/tvPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/phone"
-                android:textColor="#535b63" />
+                android:textColor="@color/color_item_title" />
         </LinearLayout>
 
         <LinearLayout

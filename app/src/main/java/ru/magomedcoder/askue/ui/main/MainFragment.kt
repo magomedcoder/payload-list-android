@@ -28,6 +28,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import ru.magomedcoder.askue.ui.base.BackPressHandler
 import ru.magomedcoder.askue.ui.base.BackPressRegistrar
+import ru.magomedcoder.askue.utils.convertFormatDateFromIso
 import kotlin.system.exitProcess
 
 @AndroidEntryPoint
@@ -43,8 +44,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // viewModel.getList() // TODO
+        viewModel.getList() // TODO
         viewModel.getCounter()
+        binding.tvCenterText.text = getString(R.string.data_wait_please)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             loginViewModel.authState.collect { state ->
                 when (state) {
@@ -198,14 +200,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupAdapter() {
         adapter = ElectronicCounterAdapter { item ->
-            findNavController()
-                .navigate(
-                    MainFragmentDirections
-                        .actionMainFragmentToDetailElectronicCounterFragment(
-                            personalAccount = item.personalAccount,
-                            serN = item.serN
-                        )
-                )
+            showDetailElectronicCounterBox(item)
         }
         binding.rvCounterItems.adapter = adapter
     }
@@ -217,6 +212,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     is MainState.Success -> {
                         bindData(item = state.response)
                         binding.swipeRefreshLayout.isRefreshing = false
+                        if (state.response.isEmpty()) {
+                            binding.tvCenterText.text = getString(R.string.nothing_found)
+                        } else {
+                            binding.tvCenterText.visibility = View.GONE
+                        }
                     }
                     is MainState.Failure -> Log.d("DetailError", state.error)
                     is MainState.Loading -> binding.swipeRefreshLayout.isRefreshing = true
@@ -242,6 +242,42 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private fun bindData(item: List<ElectronicCounter>) {
         adapter.items = item
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("SetTextI18n")
+    private fun showDetailElectronicCounterBox(item: ElectronicCounter) {
+        val messageBoxView =
+            LayoutInflater.from(activity).inflate(R.layout.detail_electronic_counter_box, null)
+        val messageBoxBuilder = AlertDialog.Builder(activity).setView(messageBoxView)
+        val messageBoxInstance = messageBoxBuilder.show()
+        val personalAccountBox = messageBoxView.findViewById(R.id.tvPersonalAccountBox) as TextView
+        val addressBox = messageBoxView.findViewById(R.id.tvAddressBox) as TextView
+        val counterModelBox = messageBoxView.findViewById(R.id.tvCounterModelBox) as TextView
+        val serNBox = messageBoxView.findViewById(R.id.tvserNBox) as TextView
+        val lastSeenAtBox = messageBoxView.findViewById(R.id.tvLastSeenAtBox) as TextView
+        val tvReadingTime = messageBoxView.findViewById(R.id.tvReadingTime) as TextView
+        val beginningPeriod = messageBoxView.findViewById(R.id.tvBeginningPeriod) as TextView
+        val endPeriod = messageBoxView.findViewById(R.id.tvEndPeriod) as TextView
+        val forPeriod = messageBoxView.findViewById(R.id.tvForPeriod) as TextView
+        val btnStatusCheck = messageBoxView.findViewById(R.id.btnStatusCheck) as TextView
+        val address = item.placeAddress
+        personalAccountBox.text = item.personalAccount
+        addressBox.text =
+            address.city + " " + address.street + " " + address.unit + " " + address.number
+        counterModelBox.text = item.deviceProfileName
+        serNBox.text = item.serN
+        lastSeenAtBox.text = convertFormatDateFromIso(item.lastSeenAt)
+        tvReadingTime.text = "С 08.06.2022 г. 08:59 До 08.06.2022 г.18:36"
+        beginningPeriod.text = item.firstPeriodCurrency
+        endPeriod.text = item.lastPeriodCurrency
+        forPeriod.text = item.allPeriodCurrency
+        btnStatusCheck.setOnClickListener() {
+
+        }
+        messageBoxView.setOnClickListener() {
+            messageBoxInstance.dismiss()
+        }
     }
 
     lateinit var backToast: Toast
