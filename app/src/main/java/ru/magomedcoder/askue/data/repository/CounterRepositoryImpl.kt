@@ -9,6 +9,7 @@ import ru.magomedcoder.askue.data.remote.toElectronicArchiveDomain
 import ru.magomedcoder.askue.data.remote.toElectronicCounterDomain
 import ru.magomedcoder.askue.data.remote.toElectronicEventDomain
 import ru.magomedcoder.askue.data.remote.toElectronicOutDomain
+import ru.magomedcoder.askue.domain.model.DeviceStatus
 import ru.magomedcoder.askue.domain.model.Event
 import ru.magomedcoder.askue.domain.repository.CounterRepository
 import ru.magomedcoder.askue.utils.Resource
@@ -114,6 +115,19 @@ class CounterRepositoryImpl(
             emit(Resource.Error(error = e.message ?: R.string.unknown_error.toString()))
         } catch (e: HttpException) {
             emit(Resource.Error(error = e.message ?: R.string.unknown_error.toString()))
+        }
+    }
+
+    override suspend fun deviceStatus(devEui: String): Resource<DeviceStatus> {
+        return try {
+            val response = api
+                .doDeviceStatus(devEui)
+                .toDeviceStatusDomain()
+            Resource.Success(response)
+        } catch (e: HttpException) {
+            Resource.Error(error = e.message ?: R.string.unknown_error.toString())
+        } catch (e: IOException) {
+            Resource.Error(error = e.message ?: R.string.unknown_error.toString())
         }
     }
 

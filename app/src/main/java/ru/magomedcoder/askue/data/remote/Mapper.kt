@@ -16,6 +16,7 @@ fun ElectronicCounterDto.toElectronicCounterDomain(): ElectronicCounter {
             unit = place_address.unit,
             number = place_address.number,
         ),
+        firstSeenAt = first_seen_at,
         lastSeenAt = last_seen_at,
         personalAccount = personal_account,
         deviceProfileName = device_profile_name,

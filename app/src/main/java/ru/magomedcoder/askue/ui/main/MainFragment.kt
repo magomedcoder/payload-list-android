@@ -26,6 +26,7 @@ import ru.magomedcoder.askue.ui.main.adapter.ElectronicCounterAdapter
 import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import ru.magomedcoder.askue.ui.base.BackPressHandler
 import ru.magomedcoder.askue.ui.base.BackPressRegistrar
 import ru.magomedcoder.askue.utils.convertFormatDateFromIso
@@ -268,12 +269,46 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         counterModelBox.text = item.deviceProfileName
         serNBox.text = item.serN
         lastSeenAtBox.text = convertFormatDateFromIso(item.lastSeenAt)
-        tvReadingTime.text = "С 08.06.2022 г. 08:59 До 08.06.2022 г.18:36"
+        tvReadingTime.text = "С " +
+                convertFormatDateFromIso(item.lastSeenAt) + " До " +
+                convertFormatDateFromIso(item.firstSeenAt)
         beginningPeriod.text = item.firstPeriodCurrency
         endPeriod.text = item.lastPeriodCurrency
         forPeriod.text = item.allPeriodCurrency
+        val statusProgressBar = messageBoxView.findViewById(R.id.pbStatusProgressBar) as ProgressBar
+        val statusCheck = messageBoxView.findViewById(R.id.statusCheck) as ConstraintLayout
+        val device = messageBoxView.findViewById(R.id.tvDevice) as TextView
+        val status = messageBoxView.findViewById(R.id.tvStatus) as TextView
+        statusCheck.visibility = GONE
+        statusProgressBar.visibility = GONE
         btnStatusCheck.setOnClickListener() {
-
+            viewModel.getDeviceStatus(item.devEui)
+            btnStatusCheck.visibility = GONE
+            statusProgressBar.visibility = VISIBLE
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.mainState.collect { state ->
+                when (state) {
+                    is MainState.Status -> {
+                        device.text = state.response.device
+                        status.text = when (state.response.status) {
+                            true -> "Включен"
+                            false -> "Выключен"
+                        }
+                        statusProgressBar.visibility = GONE
+                        statusCheck.visibility = VISIBLE
+                    }
+                    else -> Unit
+                }
+            }
+        }
+        status.setOnClickListener() {
+            // TODO
+            if (status.text == "Включен") {
+                status.text = "Выключен"
+            } else {
+                status.text = "Включен"
+            }
         }
         messageBoxView.setOnClickListener() {
             messageBoxInstance.dismiss()

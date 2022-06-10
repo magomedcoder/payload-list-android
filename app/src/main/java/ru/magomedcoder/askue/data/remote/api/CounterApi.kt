@@ -45,8 +45,12 @@ interface CounterApi {
         @Query("day") day: Int?
     ): ElectronicOutResponse
 
-
     @GET("http://10.11.58.31:8192/scadaapi/badgealerts")
     suspend fun doEventCounter(): EventCounterResponse
+
+    @GET("http://10.11.58.31:8192/scadaapi/devicestatus")
+    suspend fun doDeviceStatus(
+        @Query("dev_eui") devEui: String?
+    ): DeviceStatusResponse
 
 }

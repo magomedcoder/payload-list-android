@@ -21,8 +21,13 @@ interface CounterRepository {
 
     fun fetchEventList(): Flow<Resource<List<ElectronicEvent>>>
 
-    fun fetchArchiveList(startDate: String?, endDate: String?): Flow<Resource<List<ElectronicArchive>>>
+    fun fetchArchiveList(
+        startDate: String?,
+        endDate: String?
+    ): Flow<Resource<List<ElectronicArchive>>>
 
     fun fetchOutList(): Flow<Resource<List<ElectronicOut>>>
+
+    suspend fun deviceStatus(devEui: String): Resource<DeviceStatus>
 
 }

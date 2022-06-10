@@ -70,4 +70,13 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun getDeviceStatus(devEui: String) = viewModelScope.launch {
+        when (val response = counterRepository.deviceStatus(devEui)) {
+            is Resource.Success -> {
+                _mainState.value = MainState.Status(response.data!!)
+            }
+            else -> Unit
+        }
+    }
+
 }
