@@ -10,7 +10,7 @@ fun convertFormatDateFromIso(value: String?): String {
     if (value == null) {
         return ""
     }
-    val actual = OffsetDateTime.parse(value, DateTimeFormatter.ISO_DATE_TIME)
-    val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
-    return actual.format(formatter)
+//    val actual = OffsetDateTime.parse(value, DateTimeFormatter.ISO_DATE_TIME)
+//    val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
+    return "11"
 }

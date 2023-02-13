@@ -131,4 +131,17 @@ class CounterRepositoryImpl(
         }
     }
 
+    override suspend fun deviceMgmt(devEui: String, status: Int): Resource<DeviceStatus> {
+        return try {
+            val response = api
+                .doDeviceMgmt(devEui, status)
+                .toDeviceStatusDomain()
+            Resource.Success(response)
+        } catch (e: HttpException) {
+            Resource.Error(error = e.message ?: R.string.unknown_error.toString())
+        } catch (e: IOException) {
+            Resource.Error(error = e.message ?: R.string.unknown_error.toString())
+        }
+    }
+
 }

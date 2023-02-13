@@ -3,6 +3,7 @@ package ru.magomedcoder.askue.ui.main
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -85,9 +86,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setupAdapter()
         }
+        binding.tvClearSearch.setOnClickListener {
+            viewModel.getList()
+            binding.tvFound.visibility = GONE
+            binding.tvClearSearch.visibility = GONE
+        }
         observeDetails()
         binding.tvFound.visibility = GONE
-        binding.tvFound.text = "Найдено: "
+        binding.tvClearSearch.visibility = GONE
     }
 
     @SuppressLint("SetTextI18n")
@@ -141,6 +147,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             etApartmentNumber.text = null
             // viewModel.getList()
             binding.tvFound.visibility = GONE
+            binding.tvClearSearch.visibility = GONE
             messageBoxInstance.dismiss()
         }
         btnSearch.setOnClickListener {
@@ -155,6 +162,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 etApartmentNumber.text.toString()
             )
             binding.tvFound.visibility = VISIBLE
+            binding.tvClearSearch.visibility = VISIBLE
             messageBoxInstance.dismiss()
         }
         messageBoxView.setOnClickListener() {
@@ -166,6 +174,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     private fun showAccountBox() {
         val messageBoxView = LayoutInflater.from(activity).inflate(R.layout.nav_account_box, null)
         val messageBoxBuilder = AlertDialog.Builder(activity).setView(messageBoxView)
+        val progressBar = messageBoxView.findViewById(R.id.progressBar) as ProgressBar
+        val account = messageBoxView.findViewById(R.id.account) as LinearLayout
         val btnLogout = messageBoxView.findViewById(R.id.btnLogout) as Button
         val messageBoxInstance = messageBoxBuilder.show()
         btnLogout.setOnClickListener {
@@ -177,6 +187,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         val organizationName = messageBoxView.findViewById(R.id.tvOrganizationName) as TextView
         val email = messageBoxView.findViewById(R.id.tvEmail) as TextView
         val phoneNumber = messageBoxView.findViewById(R.id.tvPhoneNumber) as TextView
+        account.visibility = GONE
+        progressBar.visibility = VISIBLE
         loginViewModel.getUserInfo()
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             loginViewModel.userState.collect { state ->
@@ -188,6 +200,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                         organizationName.text = state.response.organizationName
                         email.text = state.response.email
                         phoneNumber.text = state.response.phoneNumber
+                        account.visibility = VISIBLE
+                        progressBar.visibility = GONE
                     }
                     else -> Unit
                 }
@@ -216,7 +230,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                         if (state.response.isEmpty()) {
                             binding.tvCenterText.text = getString(R.string.nothing_found)
                         } else {
-                            binding.tvCenterText.visibility = View.GONE
+                            binding.tvCenterText.visibility = GONE
+                            binding.tvFound.text = "Найдено: "
                         }
                     }
                     is MainState.Failure -> Log.d("DetailError", state.error)
@@ -295,6 +310,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                             true -> "Включен"
                             false -> "Выключен"
                         }
+                        status.setBackgroundResource(
+                            when (state.response.status) {
+                                true -> R.drawable.circle_counter_success
+                                false -> R.drawable.circle_counter_danger
+                            }
+                        )
+                        status.setTextColor(Color.WHITE)
                         statusProgressBar.visibility = GONE
                         statusCheck.visibility = VISIBLE
                     }
@@ -303,12 +325,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             }
         }
         status.setOnClickListener() {
-            // TODO
-            if (status.text == "Включен") {
-                status.text = "Выключен"
-            } else {
-                status.text = "Включен"
-            }
+            statusProgressBar.visibility = VISIBLE
+            viewModel.getMgmt("333133377238570c", 1) // TODO
         }
         messageBoxView.setOnClickListener() {
             messageBoxInstance.dismiss()

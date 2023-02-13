@@ -53,4 +53,5 @@
     <string name="data_wait_please">Данные загружаются. Пожалуйста, подождите.</string>
     <string name="search_parameters_specified">Параметры поиска не указаны.</string>
     <string name="nothing_found">Ничего не найдено</string>
+    <string name="clear_search_results">Очистить результаты поиска</string>
 </resources>

@@ -279,9 +279,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="4dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/background"
             android:gravity="center"
             android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/unknown"
             app:layout_constraintStart_toEndOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="parent" />

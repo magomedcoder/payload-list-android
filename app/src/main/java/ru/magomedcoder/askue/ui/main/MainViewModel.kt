@@ -79,4 +79,13 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun getMgmt(devEui: String, status: Int) = viewModelScope.launch {
+        when (val response = counterRepository.deviceMgmt(devEui, status)) {
+            is Resource.Success -> {
+                _mainState.value = MainState.Status(response.data!!)
+            }
+            else -> Unit
+        }
+    }
+
 }

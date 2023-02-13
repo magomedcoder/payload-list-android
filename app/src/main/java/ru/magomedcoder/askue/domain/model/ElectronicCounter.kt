@@ -8,7 +8,7 @@ data class ElectronicCounter(
     val placeAddress: PlaceAddress,
     val firstSeenAt: String,
     val lastSeenAt: String,
-    val personalAccount: String,
+    val personalAccount: String?,
     val deviceProfileName: String,
     val firstPeriodCurrency: String,
     val lastPeriodCurrency: String,

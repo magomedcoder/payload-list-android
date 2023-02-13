@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
@@ -165,7 +166,7 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding>() {
                         if (state.response.isEmpty()) {
                             binding.tvCenterText.text = getString(R.string.nothing_found)
                         } else {
-                            binding.tvCenterText.visibility = View.GONE
+                            binding.tvCenterText.visibility = GONE
                         }
                     }
                     is ArchiveState.Failure -> Log.d("DetailError", state.error)

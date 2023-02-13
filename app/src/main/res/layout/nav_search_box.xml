@@ -66,6 +66,7 @@
             android:ems="10"
             android:hint="@string/serial_number"
             android:inputType="number"
+            android:text="2800000213"
             tools:ignore="TextFields" />
 
         <EditText

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
@@ -54,7 +55,7 @@ class OutFragment : BaseFragment<FragmentOutBinding>() {
                         if (state.response.isEmpty()) {
                             binding.tvCenterText.text = getString(R.string.nothing_found)
                         } else {
-                            binding.tvCenterText.visibility = View.GONE
+                            binding.tvCenterText.visibility = GONE
                         }
                     }
                     is OutState.Failure -> Log.d("DetailError", state.error)

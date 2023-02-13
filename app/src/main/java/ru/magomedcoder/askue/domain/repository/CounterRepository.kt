@@ -30,4 +30,6 @@ interface CounterRepository {
 
     suspend fun deviceStatus(devEui: String): Resource<DeviceStatus>
 
+    suspend fun deviceMgmt(devEui: String, status: Int): Resource<DeviceStatus>
+
 }

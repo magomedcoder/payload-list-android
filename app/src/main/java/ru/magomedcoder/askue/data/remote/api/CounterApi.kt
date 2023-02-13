@@ -13,7 +13,7 @@ interface CounterApi {
         @Query("organization_id") organizationId: Int?,
         @Query("start_date") etFrom: String?,
         @Query("end_date") etTo: String?,
-        @Query("contract_number") etContractNumber: String?,
+        @Query("personal_accountv") etContractNumber: String?,
         @Query("ser_num") etSerialNumber: String?,
         @Query("city") etLocality: String?,
         @Query("street") etStreet: String?,
@@ -52,5 +52,11 @@ interface CounterApi {
     suspend fun doDeviceStatus(
         @Query("dev_eui") devEui: String?
     ): DeviceStatusResponse
+
+    @GET("http://10.11.58.31:8192/scadaapi/devicemgmt/")
+    suspend fun doDeviceMgmt(
+        @Query("dev_eui") devEui: String?,
+        @Query("device") device: Int
+    ): DeviceMgmtResponse
 
 }
